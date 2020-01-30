@@ -12,9 +12,11 @@
 
 typedef struct shell
 {
-    char **array;
+    char **path;
+    char **env;
     char **args;
     int fd;
+    char buffer;
 }shell_t;
 
 int my_putstr(char *str);
