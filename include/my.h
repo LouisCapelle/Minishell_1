@@ -54,4 +54,6 @@ int my_strncmp(char *s1, char *s2, int n);
 
 int find_path_line(char **env);
 
+char *get_path_line(char **env);
+
 #endif /* !MY_H_ */

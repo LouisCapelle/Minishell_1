@@ -31,16 +31,3 @@ int my_strncmp(char *s1, char *s2, int n)
     else
         return 0;
 }
-
-int find_path_line(char **env)
-{
-    int i = 0;
-
-    while (env) {
-        if (my_strncmp(env[i], "PATH=", 5) == 0) {
-            return i + 1;
-        }
-        i += 1;
-    }
-    return -1;
-}
