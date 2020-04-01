@@ -13,8 +13,7 @@ char *my_revstr(char *str)
     int	len = my_strlen(str) - 1;
     char op;
 
-    while (n < len)
-    {
+    while (n < len) {
         op = str[n];
         str[n] = str[len];
         str[len] = op;

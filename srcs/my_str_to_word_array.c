@@ -23,6 +23,7 @@ int coumpt(char *str)
 {
     int a = 0;
     int b = 0;
+
     while (str[a] != '\0') {
         if (is_charac(str[a], 1) == 1 && is_charac(str[a + 1], 1) != 1) {
             b = b + 1;
@@ -49,7 +50,6 @@ char **my_str_to_word_array(char *str)
     int a = 0;
     int b = 0;
     int c = 0;
-
 
     while (b < y) {
         c = 0;
