@@ -12,16 +12,17 @@ CC	= gcc
 RM	= rm -f
 
 SRCS	= ./srcs/main.c \
-	  ./srcs/my_put_nbr.c \
-	  ./srcs/my_putchar.c \
-	  ./srcs/my_putstr.c \
-	  ./srcs/my_revstr.c \
-	  ./srcs/my_str_to_word_array.c \
-	  ./srcs/my_strstr.c \
+	  ./srcs/lib/my_put_nbr.c \
+	  ./srcs/lib/my_putchar.c \
+	  ./srcs/lib/my_putstr.c \
+	  ./srcs/lib/my_revstr.c \
+	  ./srcs/lib/my_str_to_word_array.c \
+	  ./srcs/lib/my_strstr.c \
+	  ./srcs/lib/my_strcmp.c \
 	  ./srcs/built_in.c \
 	  ./srcs/shell.c \
 	  ./srcs/check_errors.c \
-	  ./srcs/my_strlen.c
+	  ./srcs/lib/my_strlen.c
 
 OBJS	= $(SRCS:.c=.o)
 

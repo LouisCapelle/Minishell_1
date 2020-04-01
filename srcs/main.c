@@ -11,7 +11,7 @@
 
 int main(int ac, char **av, char **ae)
 {
-    if (check_args(ac, av, ae) == 84) {
+    if (check_args(ac, ae) == 84) {
         return 84;
     } else {
         return shell(ae);

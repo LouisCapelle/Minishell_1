@@ -20,7 +20,7 @@
 typedef struct shell
 {
     char **env;
-    char **path;
+    char **path_line;
     pid_t pid;
 }shell_t;
 
@@ -46,6 +46,12 @@ int shell(char **env);
 
 shell_t *init_shell(shell_t *shell, char **env);
 
-int check_args(int ac, char **av, char **env);
+int check_args(int ac, char **env);
+
+int my_strcmp(char *s1, char *s2);
+
+int my_strncmp(char *s1, char *s2, int n);
+
+int find_path_line(char **env);
 
 #endif /* !MY_H_ */
