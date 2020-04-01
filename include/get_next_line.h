@@ -1,15 +1,15 @@
 /*
-** Get_Next_Line library
-** Only for Minishell1 and Minishell2 project
-**
-** Rank=-42 for other projects !
-**
+** EPITECH PROJECT, 2019
+** get_next_line
+** File description:
+** getnextline
 */
 
-#ifndef	__LIBGNL__
-#define	__LIBGNL__
+#ifndef getnextline
+#define getnextline
 
-char	*get_next_line(int fd);
-char	*get_next_line_dbg(int fd);
+#define READ_SIZE (4096)
 
-#endif
+char *get_next_line(int fd);
+
+#endif /* !getnextline */

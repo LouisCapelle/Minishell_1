@@ -24,7 +24,8 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/check_errors.c \
 	  ./srcs/parse_path/path.c \
 	  ./srcs/parse_path/path_to_word_array.c \
-	  ./srcs/lib/my_strlen.c
+	  ./srcs/lib/my_strlen.c \
+	  ./srcs/get_next_line.c 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -34,7 +35,7 @@ CFLAGS += -Wall -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) libgnl.a $(LDFLAGS)
+	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 clean:
 	$(RM) $(OBJS)

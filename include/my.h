@@ -22,6 +22,7 @@ typedef struct shell
     char **env;
     char *path_line;
     char **path_parsed;
+    char *buf;
     pid_t pid;
 }shell_t;
 
