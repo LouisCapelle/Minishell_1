@@ -20,7 +20,8 @@
 typedef struct shell
 {
     char **env;
-    char **path_line;
+    char *path_line;
+    char **path_parsed;
     pid_t pid;
 }shell_t;
 
@@ -55,5 +56,11 @@ int my_strncmp(char *s1, char *s2, int n);
 int find_path_line(char **env);
 
 char *get_path_line(char **env);
+
+char **path_to_word_array(char *path_line);
+
+char *my_strndup(char *src, int n);
+
+int *my_strncpy(char *dest, char *src, int n);
 
 #endif /* !MY_H_ */

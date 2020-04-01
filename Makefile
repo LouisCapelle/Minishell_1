@@ -22,7 +22,8 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/built_in.c \
 	  ./srcs/shell.c \
 	  ./srcs/check_errors.c \
-	  ./srcs/path.c \
+	  ./srcs/parse_path/path.c \
+	  ./srcs/parse_path/path_to_word_array.c \
 	  ./srcs/lib/my_strlen.c
 
 OBJS	= $(SRCS:.c=.o)
