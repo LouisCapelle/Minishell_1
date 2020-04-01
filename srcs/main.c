@@ -17,5 +17,5 @@
 
 int main(int ac, char **av, char **ae)
 {
-    return 0;
+    return shell(ae);
 }

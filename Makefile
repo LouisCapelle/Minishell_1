@@ -19,6 +19,7 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/my_str_to_word_array.c \
 	  ./srcs/my_strstr.c \
 	  ./srcs/built_in.c \
+	  ./srcs/shell.c \
 	  ./srcs/my_strlen.c
 
 OBJS	= $(SRCS:.c=.o)
