@@ -46,4 +46,6 @@ int shell(char **env);
 
 shell_t *init_shell(shell_t *shell, char **env);
 
+int check_args(int ac, char **av, char **env);
+
 #endif /* !MY_H_ */
