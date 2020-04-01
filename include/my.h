@@ -7,20 +7,20 @@
 
 #include <stdarg.h>
 #include <sys/types.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
 
 #ifndef MY_H_
 #define MY_H_
 
 typedef struct shell
 {
-    char **path;
     char **env;
-    char **array;
-    char **args;
-    int fd;
-    char buffer;
-    int status;
-    char *str_cat;
+    char **path;
     pid_t pid;
 }shell_t;
 
@@ -43,5 +43,7 @@ char *my_revstr(char *str);
 char **my_str_to_word_array(char *str);
 
 int shell(char **env);
+
+shell_t *init_shell(shell_t *shell, char **env);
 
 #endif /* !MY_H_ */
