@@ -77,4 +77,8 @@ int check_builtin(shell_t *shell);
 
 void not_found(char *cmd);
 
+char *hanled_exec_path(char *path_parsed, char *entry);
+
+int search_in_path(shell_t *shell);
+
 #endif /* !MY_H_ */
