@@ -7,9 +7,11 @@
 
 #include <stdarg.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <errno.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -42,6 +44,8 @@ int my_put_nbr(int nb);
 int my_strlen(char *str);
 
 char *my_revstr(char *str);
+
+char *my_strcat(char *str, char *buff);
 
 char **my_str_to_word_array(char *str);
 

@@ -18,10 +18,15 @@ shell_t *init_shell(shell_t *shell, char **env)
 
 int exec_command(shell_t *shell)
 {
+    char *cmd = NULL;
+
     if (shell == NULL || check_command(shell->buf_array) == 84)
         return 84;
-    if (check_builtin(shell) == 1)
-        not_found(shell->buf_array[0]);
+    if (check_builtin(shell) == 1){
+        cmd = my_strcat("/bin/", shell->buf_array[0]);
+        execve(cmd, shell->buf_array, shell->env);
+        //not_found(shell->buf_array[0]);
+    }
     return 0;
 }
 
