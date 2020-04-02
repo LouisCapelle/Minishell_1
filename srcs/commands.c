@@ -47,9 +47,9 @@ int search_in_path(shell_t *shell)
             return 0;
             exit(0);
         }
-        shell->coumpt += 1;
         i += 1;
     }
+    free(cmd);
     return 0;
 }
 
@@ -61,6 +61,8 @@ int exec_command(shell_t *shell)
         if (search_in_path(shell) != 1) {
             not_found(shell->buf_array[0]);
             exit(0);
+            free(shell->buf);
+            free(shell->buf_array);
         }
     }
     return 0;

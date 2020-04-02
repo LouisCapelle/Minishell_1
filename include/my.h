@@ -26,7 +26,6 @@ typedef struct shell
     char **path_parsed;
     char *buf;
     char **buf_array;
-    int coumpt;
     pid_t pid;
 }shell_t;
 
