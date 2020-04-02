@@ -23,7 +23,7 @@ int my_strncmp(char *s1, char *s2, int n)
 {
     int i = 0;
 
-    while (s1[i] == s2[i] && i < n) {
+    while (s1[i] == s2[i] && i != n) {
         i += 1;
     }
     if (i != n)

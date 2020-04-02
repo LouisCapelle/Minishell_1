@@ -12,7 +12,7 @@
 
 int check_exit(shell_t *shell)
 {
-    if (my_strcmp(shell->buf_array[0], "exit") == 0) {
+    if (my_strncmp(shell->buf_array[0], "exit", 5) == 0) {
         my_putstr("exit\n");
         exit(0);
     }
