@@ -18,16 +18,10 @@ shell_t *init_shell(shell_t *shell, char **env)
 
 int exec_command(shell_t *shell)
 {
-    int i = 0;
-
     if (shell == NULL || check_command(shell->buf_array) == 84)
         return 84;
-    while(shell->buf_array[i]) {
-        check_builtin(shell);
-        my_putstr(shell->buf_array[i]);
-        my_putchar('\n');
-        i++;
-    }
+    if (check_builtin(shell) == 1)
+        not_found(shell->buf_array[0]);
     return 0;
 }
 

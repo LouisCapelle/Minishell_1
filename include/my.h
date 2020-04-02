@@ -69,4 +69,6 @@ int check_command(char **cmd);
 
 int check_builtin(shell_t *shell);
 
+void not_found(char *cmd);
+
 #endif /* !MY_H_ */
