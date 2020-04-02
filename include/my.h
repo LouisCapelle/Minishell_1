@@ -85,4 +85,6 @@ int search_in_path(shell_t *shell);
 
 int exec_command(shell_t *shell);
 
+int do_builtin(int built, shell_t *shell);
+
 #endif /* !MY_H_ */

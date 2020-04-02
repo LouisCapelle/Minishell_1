@@ -55,15 +55,21 @@ int search_in_path(shell_t *shell)
 
 int exec_command(shell_t *shell)
 {
+    int built = 0;
+
     if (shell == NULL)
         return 84;
-    if (check_builtin(shell) == 1){
-        if (search_in_path(shell) != 1) {
-            not_found(shell->buf_array[0]);
-            exit(0);
-            free(shell->buf);
-            free(shell->buf_array);
-        }
+    built = check_builtin(shell);
+    if (built == -1 && search_in_path(shell) != 1){
+        not_found(shell->buf_array[0]);
+        exit(0);
+        free(shell->buf);
+        free(shell->buf_array);
+        return 84;
+    } else if (built >= 1) {
+        return do_builtin(built, shell);
+    } else {
+        return 84;
     }
     return 0;
 }
