@@ -24,9 +24,13 @@ int shell(char **env)
     char *temp = NULL;
     
     while (1) {
-        temp = check_command();
-        shell->buf_array = my_str_to_word_array(temp);
-        exec_command(shell);
+        if (isatty(STDIN_FILENO) == 1) {
+            temp = check_command();
+            shell->buf_array = my_str_to_word_array(temp);
+            exec_command(shell);
+        } else {
+            return 84;
+        }
     }
     return 0;
 }
