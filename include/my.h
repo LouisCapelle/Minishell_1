@@ -23,6 +23,7 @@ typedef struct shell
     char *path_line;
     char **path_parsed;
     char *buf;
+    char **buf_array;
     pid_t pid;
 }shell_t;
 
@@ -63,5 +64,7 @@ char **path_to_word_array(char *path_line);
 char *my_strndup(char *src, int n);
 
 int *my_strncpy(char *dest, char *src, int n);
+
+int check_command(char **cmd);
 
 #endif /* !MY_H_ */

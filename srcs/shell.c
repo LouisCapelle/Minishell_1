@@ -16,6 +16,20 @@ shell_t *init_shell(shell_t *shell, char **env)
     return shell;
 }
 
+int exec_command(shell_t *shell)
+{
+    int i = 0;
+
+    if (shell == NULL || check_command(shell->buf_array) == 84)
+        return 84;
+    while(shell->buf_array[i]) {
+        my_putstr(shell->buf_array[i]);
+        my_putchar('\n');
+        i++;
+    }
+    return 0;
+}
+
 int shell(char **env)
 {
     shell_t *shell = malloc(sizeof(shell_t));
@@ -23,8 +37,8 @@ int shell(char **env)
     
     while (1) {
         my_putstr("$>");
-        shell->buf = get_next_line(0);
-        printf("%s\n", shell->buf);
+        shell->buf_array = my_str_to_word_array(get_next_line(0));
+        exec_command(shell);
     }
     return 0;
 }

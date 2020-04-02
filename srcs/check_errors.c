@@ -15,3 +15,10 @@ int check_args(int ac, char **env)
         return 84;
     return 0;
 }
+
+int check_command(char **cmd)
+{
+    if (cmd == NULL)
+        return 84;
+    return 0;
+}
