@@ -87,4 +87,8 @@ int exec_command(shell_t *shell);
 
 int do_builtin(int built, shell_t *shell);
 
+int cd(shell_t *shell);
+
+char *get_home_path(char **env);
+
 #endif /* !MY_H_ */
