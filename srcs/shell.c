@@ -13,18 +13,40 @@ shell_t *init_shell(shell_t *shell, char **env)
     shell->env = env;
     shell->path_line = get_path_line(env);
     shell->path_parsed = path_to_word_array(shell->path_line);
+    shell->path_parsed[0] = shell->path_parsed[0]+5;
     return shell;
+}
+
+char *hanled_exec_path(char *path_parsed, char *entry)
+{
+    char *result = NULL;
+
+    if (path_parsed == NULL || entry == NULL)
+        return NULL;
+    
+    result = my_strcat(path_parsed, "/");
+    result = my_strcat(result, entry);
+    return result;
+}
+
+int search_in_path(shell_t *shell)
+{
+    char *cmd = NULL;
+    int i = 0;
+
+    cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
+    while (execve(cmd, shell->buf_array, shell->env) == -1 && i <= count_path(shell->path_line)) {
+        cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
+        i += 1;
+    }
 }
 
 int exec_command(shell_t *shell)
 {
-    char *cmd = NULL;
-
     if (shell == NULL || check_command(shell->buf_array) == 84)
         return 84;
     if (check_builtin(shell) == 1){
-        cmd = my_strcat("/bin/", shell->buf_array[0]);
-        execve(cmd, shell->buf_array, shell->env);
+        search_in_path(shell);
         //not_found(shell->buf_array[0]);
     }
     return 0;

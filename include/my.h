@@ -49,6 +49,8 @@ char *my_strcat(char *str, char *buff);
 
 char **my_str_to_word_array(char *str);
 
+int count_path(char *line);
+
 int shell(char **env);
 
 shell_t *init_shell(shell_t *shell, char **env);
