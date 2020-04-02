@@ -26,6 +26,7 @@ typedef struct shell
     char **path_parsed;
     char *buf;
     char **buf_array;
+    int coumpt;
     pid_t pid;
 }shell_t;
 
@@ -71,7 +72,9 @@ char *my_strndup(char *src, int n);
 
 int *my_strncpy(char *dest, char *src, int n);
 
-int check_command(char **cmd);
+char *check_command(void);
+
+void not_found(char *cmd);
 
 int check_builtin(shell_t *shell);
 
@@ -80,5 +83,7 @@ void not_found(char *cmd);
 char *hanled_exec_path(char *path_parsed, char *entry);
 
 int search_in_path(shell_t *shell);
+
+int exec_command(shell_t *shell);
 
 #endif /* !MY_H_ */

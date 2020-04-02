@@ -19,7 +19,7 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/lib/my_str_to_word_array.c \
 	  ./srcs/lib/my_strstr.c \
 	  ./srcs/lib/my_strcmp.c \
-	  ./srcs/built_in.c \
+	  ./srcs/built_in/built_in.c \
 	  ./srcs/shell.c \
 	  ./srcs/check_errors.c \
 	  ./srcs/parse_path/path.c \

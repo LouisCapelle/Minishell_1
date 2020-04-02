@@ -6,6 +6,13 @@
 */
 
 #include "my.h"
+#include "get_next_line.h"
+
+void not_found(char *cmd)
+{
+    my_putstr(cmd);
+    my_putstr(": Command not found.\n");
+}
 
 int check_args(int ac, char **env)
 {
@@ -16,9 +23,16 @@ int check_args(int ac, char **env)
     return 0;
 }
 
-int check_command(char **cmd)
+char *check_command(void)
 {
-    if (cmd == NULL)
-        return 84;
-    return 0;
+    char *cmd = NULL;
+
+    my_putstr("$>");
+    cmd = get_next_line(0);
+    while (cmd == NULL || cmd[0] == '\0' ||
+        cmd[0] == ' ' || cmd[0] == '\n') {
+        my_putstr("$>");
+        cmd = get_next_line(0);
+    }
+    return cmd;
 }

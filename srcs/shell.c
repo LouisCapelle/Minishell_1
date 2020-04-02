@@ -17,25 +17,18 @@ shell_t *init_shell(shell_t *shell, char **env)
     return shell;
 }
 
-int exec_command(shell_t *shell)
-{
-    if (shell == NULL || check_command(shell->buf_array) == 84)
-        return 84;
-    if (check_builtin(shell) == 1){
-        search_in_path(shell);
-    }
-    return 0;
-}
-
 int shell(char **env)
 {
     shell_t *shell = malloc(sizeof(shell_t));
     shell = init_shell(shell, env);
+    char *temp = NULL;
     
     while (1) {
-        my_putstr("$>");
-        shell->buf_array = my_str_to_word_array(get_next_line(0));
+        temp = check_command();
+        shell->buf_array = my_str_to_word_array(temp);
         exec_command(shell);
+        free(shell->buf_array);
+        free(temp);
     }
     return 0;
 }
