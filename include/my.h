@@ -67,4 +67,6 @@ int *my_strncpy(char *dest, char *src, int n);
 
 int check_command(char **cmd);
 
+int check_builtin(shell_t *shell);
+
 #endif /* !MY_H_ */

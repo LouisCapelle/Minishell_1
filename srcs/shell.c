@@ -23,6 +23,7 @@ int exec_command(shell_t *shell)
     if (shell == NULL || check_command(shell->buf_array) == 84)
         return 84;
     while(shell->buf_array[i]) {
+        check_builtin(shell);
         my_putstr(shell->buf_array[i]);
         my_putchar('\n');
         i++;
