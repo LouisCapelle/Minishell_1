@@ -33,12 +33,17 @@ int search_in_path(shell_t *shell)
 {
     char *cmd = NULL;
     int i = 0;
+    int success = 0;
 
     cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
-    while (execve(cmd, shell->buf_array, shell->env) == -1 && i <= count_path(shell->path_line)) {
+    while (success == 0 && i <= count_path(shell->path_line)) {
         cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
+        if (execve(cmd, shell->buf_array, shell->env) != -1)
+            success = 1;
         i += 1;
     }
+    not_found(shell->buf_array[0]);
+    return 0;
 }
 
 int exec_command(shell_t *shell)
@@ -47,7 +52,6 @@ int exec_command(shell_t *shell)
         return 84;
     if (check_builtin(shell) == 1){
         search_in_path(shell);
-        //not_found(shell->buf_array[0]);
     }
     return 0;
 }
