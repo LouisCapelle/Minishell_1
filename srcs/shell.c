@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include "get_next_line.h"
 
 shell_t *init_shell(shell_t *shell, char **env)
 {
@@ -25,8 +24,6 @@ int shell(char **env)
     char **buffer = NULL;
 
     while (1) {
-        //if (isatty(STDIN_FILENO) == 1) {
-        //}
         temp = check_command();
         buffer = my_str_to_word_array(temp);
         exec_command(env, buffer, shell);

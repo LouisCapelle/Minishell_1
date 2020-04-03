@@ -6,7 +6,7 @@
 */
 
 #include "my.h"
-#include "get_next_line.h"
+#include <stdio.h>
 
 void not_found(char *cmd)
 {
@@ -26,15 +26,20 @@ int check_args(int ac, char **env)
 char *check_command(void)
 {
     char *cmd = NULL;
+    size_t len = 2048;
+    int eof = 0;
 
-    my_putstr("$>");
-    cmd = get_next_line(0);
-    while (cmd == NULL || cmd[0] == '\0' ||
-        cmd[0] == ' ' || cmd[0] == '\n') {
-        free(cmd);
+    if (isatty(STDIN_FILENO))
         my_putstr("$>");
-        cmd = get_next_line(0);
+    eof = getline(&cmd, &len, stdin);
+    if (cmd && cmd[0] != '\n' && cmd[0] != '\0' && cmd != NULL)
+        return cmd;
+    if (eof == -1 && !isatty(STDIN_FILENO)){
+        exit(0);
+    } else if (eof == -1) {
+        my_putstr(" exit\n");
+        exit(0);
+    } else {
+        check_command();
     }
-    return cmd;
-    free(cmd);
 }
