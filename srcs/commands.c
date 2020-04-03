@@ -27,49 +27,58 @@ char *hanled_exec_path(char *path_parsed, char *entry)
     return result;
 }
 
-int search_in_path(shell_t *shell)
+char  *search_in_path(shell_t *shell)
 {
     char *cmd = NULL;
     int i = 0;
     int success = 0;
-    int error;
 
-    shell->pid = fork();
     cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
     while (success == 0 && i <= count_path(shell->path_line)) {
         cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
-        if (shell->pid != 0) {
-            wait(&error);
-            get_segfault(error);
-            return 1;
-        }else if (execve(cmd, shell->buf_array, shell->env) != -1) {
+        if (access(cmd, 1) != -1)
             success = 1;
-            return 0;
-            exit(0);
-        }
         i += 1;
     }
-    free(cmd);
+    if (success == 0)
+        return NULL;
+    else 
+        return cmd;
+}
+
+int exec_cmd(shell_t *shell, char *cmd)
+{
+    int error = 0;
+
+    shell->pid = fork();
+    if (shell->pid != 0) {
+        wait(&error);
+        get_segfault(error);
+    }else {
+        if (execve(cmd, shell->buf_array, shell->env) == -1) {
+            my_putstr("error\n");
+        }
+        exit(0);
+    }
     return 0;
 }
 
 int exec_command(shell_t *shell)
 {
     int built = 0;
+    char *cmd = NULL;
 
     if (shell == NULL)
         return 84;
     built = check_builtin(shell);
-    if (built == -1 && search_in_path(shell) != 1){
+    cmd = search_in_path(shell);
+    if (built == -1 && cmd == NULL){
         not_found(shell->buf_array[0]);
-        exit(0);
-        free(shell->buf);
-        free(shell->buf_array);
-        return 84;
-    } else if (built >= 1) {
-        return do_builtin(built, shell);
-    } else {
-        return 84;
     }
+    if (cmd != NULL) {
+        exec_cmd(shell, cmd);
+    }
+    if (built >= 1)
+        return do_builtin(built, shell);
     return 0;
 }

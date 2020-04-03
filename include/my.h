@@ -81,7 +81,7 @@ void not_found(char *cmd);
 
 char *hanled_exec_path(char *path_parsed, char *entry);
 
-int search_in_path(shell_t *shell);
+char *search_in_path(shell_t *shell);
 
 int exec_command(shell_t *shell);
 
