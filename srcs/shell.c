@@ -28,8 +28,6 @@ int shell(char **env)
             temp = check_command();
             shell->buf_array = my_str_to_word_array(temp);
             exec_command(shell);
-        } else {
-            return 84;
         }
     }
     return 0;

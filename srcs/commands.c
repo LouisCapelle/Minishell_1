@@ -67,8 +67,6 @@ int exec_command(shell_t *shell)
     int built = 0;
     char *cmd = NULL;
 
-    if (shell == NULL)
-        return 84;
     built = check_builtin(shell);
     cmd = search_in_path(shell);
     if (built == -1 && cmd == NULL){
