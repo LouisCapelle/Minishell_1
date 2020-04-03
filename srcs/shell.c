@@ -25,12 +25,12 @@ int shell(char **env)
     char **buffer = NULL;
 
     while (1) {
-        if (isatty(STDIN_FILENO) == 1) {
-            temp = check_command();
-            buffer = my_str_to_word_array(temp);
-            exec_command(env, buffer, shell);
-            free_all(buffer);
-        }
+        //if (isatty(STDIN_FILENO) == 1) {
+        //}
+        temp = check_command();
+        buffer = my_str_to_word_array(temp);
+        exec_command(env, buffer, shell);
+        free_all(buffer);
     }
     return 0;
 }
