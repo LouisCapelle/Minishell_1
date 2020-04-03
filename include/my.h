@@ -91,6 +91,6 @@ int cd(char **buffer, char **env);
 
 char *get_home_path(char **env);
 
-void **free_all(char **buf_array);
+void free_all(char **buf_array);
 
 #endif /* !MY_H_ */

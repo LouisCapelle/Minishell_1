@@ -29,6 +29,7 @@ int check_builtin(char **buffer)
 {
     if (check_exit(buffer) == 0) {
         my_putstr("exit\n");
+        free_all(buffer);
         exit(0);
     }
     if (check_cd(buffer) == 0)

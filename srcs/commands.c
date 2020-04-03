@@ -74,12 +74,15 @@ int exec_command(char **env, char **buffer, shell_t *shell)
     cmd = search_in_path(shell->path_line, buffer, shell->path_parsed);
     if (built == -1 && cmd == NULL){
         not_found(buffer[0]);
+        free(cmd);
     }
     if (cmd != NULL) {
         exec_cmd(buffer, cmd, env);
+        free(cmd);
     }
     if (built >= 1){
         do_builtin(built, env, buffer);
+        free(cmd);
     }
     return 0;
 }

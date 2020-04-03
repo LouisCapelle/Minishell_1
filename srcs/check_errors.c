@@ -36,4 +36,5 @@ char *check_command(void)
         cmd = get_next_line(0);
     }
     return cmd;
+    free(cmd);
 }

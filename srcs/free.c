@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-void **free_all(char **buf_array)
+void free_all(char **buf_array)
 {
     int i = 0;
 
@@ -16,6 +16,4 @@ void **free_all(char **buf_array)
         i += 1;
     }
     free(buf_array);
-    return NULL;
 }
-
