@@ -22,6 +22,7 @@ int count_path(char *line)
     }
     return result;
 }
+
 char **malloc_path(char *str)
 {
     char **result = malloc(sizeof(char *) * (count_path(str) + 1));

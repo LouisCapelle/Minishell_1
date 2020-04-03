@@ -24,7 +24,7 @@ int go_home(shell_t *shell)
 
     if (chdir(home_path) != 0)
         my_putstr("Can't change directory\n");
-        
+    return 0;
 }
 
 int cd(shell_t *shell)

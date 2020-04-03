@@ -22,7 +22,7 @@ int shell(char **env)
     shell_t *shell = malloc(sizeof(shell_t));
     shell = init_shell(shell, env);
     char *temp = NULL;
-    
+
     while (1) {
         if (isatty(STDIN_FILENO) == 1) {
             temp = check_command();

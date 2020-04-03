@@ -21,7 +21,6 @@ char *hanled_exec_path(char *path_parsed, char *entry)
 
     if (path_parsed == NULL || entry == NULL)
         return NULL;
-    
     result = my_strcat(path_parsed, "/");
     result = my_strcat(result, entry);
     return result;
@@ -42,7 +41,7 @@ char  *search_in_path(shell_t *shell)
     }
     if (success == 0)
         return NULL;
-    else 
+    else
         return cmd;
 }
 
