@@ -49,12 +49,12 @@ char *get_path_line(char **env)
 {
     int i = 0;
     int pos_path = find_path_line(env);
-    char *result = malloc(sizeof(char) * my_strlen(env[pos_path]));
+    char *result = malloc(sizeof(char) * (my_strlen(env[pos_path]) + 1));
 
     while (env[pos_path][i]) {
         result[i] = env[pos_path][i];
         i += 1;
     }
-    result[i + 1] = '\0';
+    result[i] = '\0';
     return result;
 }

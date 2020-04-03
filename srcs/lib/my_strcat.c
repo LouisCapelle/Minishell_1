@@ -26,4 +26,5 @@ char *my_strcat(char *str, char *buff)
     }
     dest[i] = '\0';
     return dest;
+    free(dest);
 }

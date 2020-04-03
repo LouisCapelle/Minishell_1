@@ -46,14 +46,14 @@ int len_of_word(char *str, int i)
 char **my_str_to_word_array(char *str)
 {
     int y = coumpt(str);
-    char **result = malloc(sizeof(char *) * y + 1);
+    char **result = malloc(sizeof(char *) * (y + 1));
     int a = 0;
     int b = 0;
     int c = 0;
 
     while (b < y) {
         c = 0;
-        result[b] = malloc(sizeof(char) * len_of_word(str, a));
+        result[b] = malloc(sizeof(char) * (len_of_word(str, a) + 1));
         while (str[a] != '\0' && is_charac(str[a], 1) != 0) {
             result[b][c] = str[a];
             c = c + 1;
@@ -63,5 +63,6 @@ char **my_str_to_word_array(char *str)
         a = a + 1;
         b = b + 1;
     }
+    result[b] = NULL;
     return (result);
 }

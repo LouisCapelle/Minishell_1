@@ -23,6 +23,7 @@ char *get_next_line(int fd)
     while (buffer[stock] != '\0') {
         if (buffer[stock] == '\n' || buffer[stock + 1] == '\0') {
             stock++;
+            str[first_line] = '\0';
             return (str);
         }
         str[first_line] = buffer[stock];

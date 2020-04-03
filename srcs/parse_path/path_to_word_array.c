@@ -20,7 +20,7 @@ int count_path(char *line)
             result += 1;
         i += 1;
     }
-    return result;
+    return result + 1;
 }
 
 char **malloc_path(char *str)
@@ -33,6 +33,7 @@ char **malloc_path(char *str)
     while (str[i] != '\0') {
         if (str[i] == ':') {
             result[k] = malloc(sizeof(char) *(j + 1));
+            result[k][j] = '\0';
             k++;
             j = 0;
         } else
@@ -40,6 +41,7 @@ char **malloc_path(char *str)
         i++;
     }
     result[k] = malloc(sizeof(char) *(j + 1));
+    result[k][j] = '\0';
     return (result);
 }
 
@@ -64,4 +66,5 @@ char **path_to_word_array(char *path_line)
     result[line][c] = '\0';
     result[line + 1] = NULL;
     return (result);
+    free(result);
 }

@@ -29,7 +29,7 @@ int shell(char **env)
             temp = check_command();
             buffer = my_str_to_word_array(temp);
             exec_command(env, buffer, shell);
-            buffer = free_all(buffer);
+            free_all(buffer);
         }
     }
     return 0;

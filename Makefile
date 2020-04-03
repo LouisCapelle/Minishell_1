@@ -34,7 +34,7 @@ SRCS	= ./srcs/main.c \
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS = -I ./include/
-CFLAGS += -Wall -Wextra
+CFLAGS += -Wall -Wextra -g
 
 all: $(NAME)
 

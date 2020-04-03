@@ -32,7 +32,8 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed)
     int i = 0;
     int success = 0;
 
-    cmd = hanled_exec_path(path_parsed[i], buffer[0]);
+    if (my_strncmp(buffer[0], "cd", 2) == 0)
+        return NULL;
     while (success == 0 && i <= count_path(path_line)) {
         cmd = hanled_exec_path(path_parsed[i], buffer[0]);
         if (access(cmd, 1) != -1)

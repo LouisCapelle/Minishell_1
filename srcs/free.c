@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-char **free_all(char **buf_array)
+void **free_all(char **buf_array)
 {
     int i = 0;
 
@@ -18,3 +18,4 @@ char **free_all(char **buf_array)
     free(buf_array);
     return NULL;
 }
+
