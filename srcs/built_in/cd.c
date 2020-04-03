@@ -11,8 +11,6 @@ int get_args(char **args)
 {
     int i = 0;
 
-    if (args == NULL)
-        return 84;
     while (args[i])
         i++;
     return i;

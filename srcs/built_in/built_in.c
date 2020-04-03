@@ -38,8 +38,8 @@ int check_builtin(shell_t *shell)
 
 int do_builtin(int built, shell_t *shell)
 {
-    if (shell == NULL || built < 1)
-        return 84;
+    if (built < 1)
+        return 0;
     if (built == 1)
         cd(shell);
     return 0;
