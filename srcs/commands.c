@@ -38,7 +38,7 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed)
         cmd = hanled_exec_path(path_parsed[i], buffer[0]);
         if (access(cmd, 1) != -1)
             success = 1;
-        else 
+        else
             success = 0;
         i += 1;
     }
