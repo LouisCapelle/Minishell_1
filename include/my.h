@@ -75,20 +75,22 @@ char *check_command(void);
 
 void not_found(char *cmd);
 
-int check_builtin(shell_t *shell);
+int check_builtin(char **buffer);
 
 void not_found(char *cmd);
 
 char *hanled_exec_path(char *path_parsed, char *entry);
 
-char *search_in_path(shell_t *shell);
+char *search_in_path(char *path_line, char **buffer, char **path_parsed);
 
-int exec_command(shell_t *shell);
+int exec_command(char **env, char **buffer, shell_t *shell);
 
-int do_builtin(int built, shell_t *shell);
+int do_builtin(int built, char **env, char **buffer);
 
-int cd(shell_t *shell);
+int cd(char **buffer, char **env);
 
 char *get_home_path(char **env);
+
+char **free_all(char **buf_array);
 
 #endif /* !MY_H_ */

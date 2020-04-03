@@ -26,16 +26,18 @@ char *hanled_exec_path(char *path_parsed, char *entry)
     return result;
 }
 
-char  *search_in_path(shell_t *shell)
+char *search_in_path(char *path_line, char **buffer, char **path_parsed)
 {
     char *cmd = NULL;
     int i = 0;
     int success = 0;
 
-    cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
-    while (success == 0 && i <= count_path(shell->path_line)) {
-        cmd = hanled_exec_path(shell->path_parsed[i], shell->buf_array[0]);
+    cmd = hanled_exec_path(path_parsed[i], buffer[0]);
+    while (success == 0 && i <= count_path(path_line)) {
+        cmd = hanled_exec_path(path_parsed[i], buffer[0]);
         if (access(cmd, 1) != -1)
+            success = 0;
+        else 
             success = 1;
         i += 1;
     }
@@ -45,16 +47,16 @@ char  *search_in_path(shell_t *shell)
         return cmd;
 }
 
-int exec_cmd(shell_t *shell, char *cmd)
+int exec_cmd(char **buffer, char *cmd, char **env)
 {
     int error = 0;
+    pid_t pid = fork();
 
-    shell->pid = fork();
-    if (shell->pid != 0) {
+    if (pid != 0) {
         wait(&error);
         get_segfault(error);
     }else {
-        if (execve(cmd, shell->buf_array, shell->env) == -1) {
+        if (execve(cmd, buffer, env) == -1) {
             my_putstr("error\n");
         }
         exit(0);
@@ -62,20 +64,21 @@ int exec_cmd(shell_t *shell, char *cmd)
     return 0;
 }
 
-int exec_command(shell_t *shell)
+int exec_command(char **env, char **buffer, shell_t *shell)
 {
     int built = 0;
     char *cmd = NULL;
 
-    built = check_builtin(shell);
-    cmd = search_in_path(shell);
+    built = check_builtin(buffer);
+    cmd = search_in_path(shell->path_line, buffer, shell->path_parsed);
     if (built == -1 && cmd == NULL){
-        not_found(shell->buf_array[0]);
+        not_found(buffer[0]);
     }
     if (cmd != NULL) {
-        exec_cmd(shell, cmd);
+        exec_cmd(buffer, cmd, env);
     }
-    if (built >= 1)
-        return do_builtin(built, shell);
+    if (built >= 1){
+        do_builtin(built, env, buffer);
+    }
     return 0;
 }

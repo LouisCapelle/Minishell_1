@@ -16,20 +16,20 @@ int get_args(char **args)
     return i;
 }
 
-int go_home(shell_t *shell)
+int go_home(char **env)
 {
-    char *home_path = get_home_path(shell->env)+5;
+    char *home_path = get_home_path(env)+5;
 
     if (chdir(home_path) != 0)
         my_putstr("Can't change directory\n");
     return 0;
 }
 
-int cd(shell_t *shell)
+int cd(char **buffer, char **env)
 {
-    if (get_args(shell->buf_array) < 2)
-        go_home(shell);
-    if (get_args(shell->buf_array) > 2)
+    if (get_args(buffer) < 2)
+        go_home(env);
+    if (get_args(buffer) > 2)
         my_putstr("cd: Too many arguments.\n");
     return 0;
 }

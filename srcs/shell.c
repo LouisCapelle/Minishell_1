@@ -22,14 +22,15 @@ int shell(char **env)
     shell_t *shell = malloc(sizeof(shell_t));
     shell = init_shell(shell, env);
     char *temp = NULL;
+    char **buffer = NULL;
 
     while (1) {
         if (isatty(STDIN_FILENO) == 1) {
             temp = check_command();
-            shell->buf_array = my_str_to_word_array(temp);
-            exec_command(shell);
+            buffer = my_str_to_word_array(temp);
+            exec_command(env, buffer, shell);
+            buffer = free_all(buffer);
         }
-        free(temp);
     }
     return 0;
 }
