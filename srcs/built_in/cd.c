@@ -28,7 +28,7 @@ int go_home(char **env)
 int cd(char **buffer, char **env)
 {
     if (get_args(buffer) < 2)
-        go_home(env);
+        my_putstr("normally go to home directory\n");
     if (get_args(buffer) > 2)
         my_putstr("cd: Too many arguments.\n");
     return 0;
