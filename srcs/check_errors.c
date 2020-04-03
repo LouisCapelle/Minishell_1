@@ -31,6 +31,7 @@ char *check_command(void)
     cmd = get_next_line(0);
     while (cmd == NULL || cmd[0] == '\0' ||
         cmd[0] == ' ' || cmd[0] == '\n') {
+        free(cmd);
         my_putstr("$>");
         cmd = get_next_line(0);
     }
