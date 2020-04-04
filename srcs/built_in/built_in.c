@@ -19,8 +19,7 @@ int check_exit(char **buffer)
 
 int check_cd(char **buffer)
 {
-    if (my_strncmp(buffer[0], "cd",
-            my_strlen(buffer[0])) == 0)
+    if (my_strncmp(buffer[0], "cd", 3) == 0)
         return 0;
     return 1;
 }
