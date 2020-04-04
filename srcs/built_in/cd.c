@@ -21,7 +21,7 @@ int go_home(char **env)
     char *home_path = get_home_path(env)+5;
 
     if (chdir(home_path) != 0)
-        my_putstr("Can't change directory\n");
+        perror("home");
     return 0;
 }
 
