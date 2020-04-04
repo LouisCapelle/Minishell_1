@@ -25,11 +25,23 @@ int go_home(char **env)
     return 0;
 }
 
+int go_path(char *path)
+{
+    if (chdir(path) != 0)
+        perror(path);
+    return 0;
+}
+
 int cd(char **buffer, char **env)
 {
-    if (get_args(buffer) < 2)
+    int args = 0;
+
+    args = get_args(buffer);
+    if (args < 2)
         go_home(env);
-    if (get_args(buffer) > 2)
+    if (args == 2)
+        go_path(buffer[1]);
+    if (args > 2)
         my_putstr("cd: Too many arguments.\n");
     return 0;
 }
