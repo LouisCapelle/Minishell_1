@@ -40,6 +40,7 @@ char *check_command(void)
         my_putstr(" exit\n");
         exit(0);
     } else {
+        free(cmd);
         check_command();
     }
 }
