@@ -93,4 +93,8 @@ char *get_home_path(char **env);
 
 void free_all(char **buf_array);
 
+int get_args(char **args);
+
+int set_env(char **buffer, char **env);
+
 #endif /* !MY_H_ */

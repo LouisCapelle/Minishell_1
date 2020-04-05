@@ -24,6 +24,13 @@ int check_cd(char **buffer)
     return 1;
 }
 
+int check_env(char **buffer)
+{
+    if (my_strncmp(buffer[0], "setenv", 7) == 0)
+        return 0;
+    return 1;
+}
+
 int check_builtin(char **buffer)
 {
     if (check_exit(buffer) == 0) {
@@ -33,6 +40,8 @@ int check_builtin(char **buffer)
     }
     if (check_cd(buffer) == 0)
         return 1;
+    if (check_env(buffer) == 0)
+        return 2;
     return -1;
 }
 
@@ -42,5 +51,7 @@ int do_builtin(int built, char **env, char **buffer)
         return 0;
     if (built == 1)
         cd(buffer, env);
+    if (built == 2)
+        set_env(buffer, env);
     return 0;
 }
