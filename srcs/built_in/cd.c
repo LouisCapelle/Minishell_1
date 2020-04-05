@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include <sys/stat.h>
 
 int get_args(char **args)
 {
@@ -27,8 +28,13 @@ int go_home(char **env)
 
 int go_path(char *path)
 {
-    if (chdir(path) != 0)
-        perror(path);
+    struct stat error;
+
+    if (chdir(path) != 0) {
+        my_putstr(path);
+        if (stat(path, &error) == -1)
+            my_putstr(": No such file or directory.\n");
+    }
     return 0;
 }
 
