@@ -97,4 +97,6 @@ int get_args(char **args);
 
 int set_env(char **buffer, char **env);
 
+int exec_cmd(char **buffer, char *cmd, char **env);
+
 #endif /* !MY_H_ */
