@@ -99,4 +99,6 @@ int set_env(char **buffer, char **env);
 
 int exec_cmd(char **buffer, char *cmd, char **env);
 
+int unset_env(char **buffer, char **env);
+
 #endif /* !MY_H_ */
