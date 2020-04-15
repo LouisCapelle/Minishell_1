@@ -6,12 +6,16 @@
 */
 
 #include "my.h"
+#include <string.h>
 
 void get_segfault(int segfault)
 {
-    if (WIFSIGNALED(segfault) && !WIFEXITED(segfault) && WCOREDUMP(segfault)) {
-        my_putstr(" (core dumped)");
-        my_putstr("\n");
+    if (WIFSIGNALED(segfault) && WCOREDUMP(segfault)) {
+        my_putstr(" (core dumped)\n");
+    }
+    if (WIFSIGNALED(segfault) && WTERMSIG(segfault) !=8 ) {
+        my_putstr(strsignal(WTERMSIG(segfault)));
+        my_putchar('\n');
     }
 }
 
@@ -36,7 +40,7 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed)
         return NULL;
     while (success == 0 && i <= count_path(path_line)) {
         cmd = hanled_exec_path(path_parsed[i], buffer[0]);
-        if (access(cmd, 1) != -1)
+        if (access(cmd, F_OK) == 0)
             success = 1;
         else
             success = 0;
@@ -58,7 +62,15 @@ int exec_cmd(char **buffer, char *cmd, char **env)
         get_segfault(error);
     }else {
         if (execve(cmd, buffer, env) == -1) {
-            my_putstr("error\n");
+            if (errno == 8) {
+                my_putstr(cmd);
+                my_putstr(": Exed format error. Wrong Architecture.\n");
+                exit(0);
+            } else if (errno == EACCES) {
+                my_putstr(cmd);
+                my_putstr(": Permission denied.\n");
+                exit(0);
+            }
         }
         exit(0);
     }
