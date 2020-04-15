@@ -109,4 +109,8 @@ int check_setenv(char **buffer);
 
 int check_unsetenv(char **buffer);
 
+int go_old(char **env);
+
+int go_path(char *path);
+
 #endif /* !MY_H_ */

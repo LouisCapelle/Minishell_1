@@ -52,8 +52,10 @@ int cd(char **buffer, char **env)
     args = get_args(buffer);
     if (args < 2)
         go_home(env);
-    if (args == 2)
+    if (args == 2 && buffer[1][0] != '-')
         go_path(buffer[1]);
+    if (args == 2 && buffer[1][0] == '-')
+        go_old(env);
     if (args > 2)
         my_putstr("cd: Too many arguments.\n");
     return 0;
