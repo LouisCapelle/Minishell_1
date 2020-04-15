@@ -32,8 +32,15 @@ int go_path(char *path)
 
     if (chdir(path) != 0) {
         my_putstr(path);
-        if (stat(path, &error) == -1)
+        if (stat(path, &error) == -1) {
             my_putstr(": No such file or directory.\n");
+            return 1;
+        }
+        if (access(path, X_OK) == -1 && access(path, F_OK) == 0)
+            my_putstr(": Permission denied.\n");
+        if (!S_ISDIR(error.st_mode)) {
+            my_putstr(": Not a directory.\n");
+        }
     }
     return 0;
 }
