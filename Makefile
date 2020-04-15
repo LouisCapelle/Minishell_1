@@ -29,6 +29,7 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/commands.c \
 	  ./srcs/built_in/cd.c \
 	  ./srcs/built_in/env.c \
+	  ./srcs/built_in/built_2.c \
 	  ./srcs/free.c
 
 OBJS	= $(SRCS:.c=.o)

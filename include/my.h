@@ -101,4 +101,12 @@ int exec_cmd(char **buffer, char *cmd, char **env);
 
 int unset_env(char **buffer, char **env);
 
+int check_exit(char **buffer);
+
+int check_cd(char **buffer);
+
+int check_setenv(char **buffer);
+
+int check_unsetenv(char **buffer);
+
 #endif /* !MY_H_ */
