@@ -16,8 +16,7 @@ void get_segfault(int segfault)
         else
             my_putstr(strsignal(WTERMSIG(segfault)));
         if (WCOREDUMP(segfault))
-            my_putstr(" (core dumped)");
-        my_putstr("\n");
+            my_putstr(" (core dumped)\n");
     }
 }
 
