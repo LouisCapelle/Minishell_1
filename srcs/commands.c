@@ -10,12 +10,14 @@
 
 void get_segfault(int segfault)
 {
-    if (WIFSIGNALED(segfault) && WCOREDUMP(segfault)) {
-        my_putstr(" (core dumped)\n");
-    }
-    if (WIFSIGNALED(segfault) && WTERMSIG(segfault) !=8 ) {
-        my_putstr(strsignal(WTERMSIG(segfault)));
-        my_putchar('\n');
+    if (!WIFEXITED(segfault) && WIFSIGNALED(segfault)) {
+        if (WTERMSIG(segfault) == 8)
+            my_putstr("Floating exception\n");
+        else
+            my_putstr(strsignal(WTERMSIG(segfault)));
+        if (WCOREDUMP(segfault))
+            my_putstr(" (core dumped)");
+        my_putstr("\n");
     }
 }
 
@@ -60,9 +62,9 @@ int exec_cmd(char **buffer, char *cmd, char **env)
     if (pid != 0) {
         wait(&error);
         get_segfault(error);
-    }else {
+    } else {
         if (execve(cmd, buffer, env) == -1) {
-            if (errno == 8) {
+            if (errno == ENOEXEC) {
                 my_putstr(cmd);
                 my_putstr(": Exed format error. Wrong Architecture.\n");
                 exit(0);
