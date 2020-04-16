@@ -67,8 +67,6 @@ char *get_path_line(char **env);
 
 char **path_to_word_array(char *path_line);
 
-char *my_strndup(char *src, int n);
-
 int *my_strncpy(char *dest, char *src, int n);
 
 char *check_command(void);
@@ -111,6 +109,14 @@ int check_unsetenv(char **buffer);
 
 int go_old(char **env);
 
-int go_path(char *path);
+int go_path(char *path, char **env);
+
+char *my_strcpy(char *dest, char *src);
+
+char *my_strdup(char *str);
+
+int write_old_path(char **env);
+
+int write_new_path(char **env);
 
 #endif /* !MY_H_ */
