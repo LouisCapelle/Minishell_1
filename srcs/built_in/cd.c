@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include <sys/stat.h>
+#include <limits.h>;
 
 int get_args(char **args)
 {
@@ -17,50 +18,37 @@ int get_args(char **args)
     return i;
 }
 
-int go_home(char **env)
+int init_going_to_path(char *path, shell_t *shell, char *temp)
 {
-    char *home_path = get_home_path(env)+5;
+    int status = 0;
+    char old_path[PATH_MAX];
 
-    if (chdir(home_path) != 0)
-        perror("home");
-    return 0;
+    getcwd(old_path, sizeof(old_path));
+    shell->old_path = my_strdup(old_path);
+    status = go_path(path);
+    if (status == 1)
+        shell->old_path = my_strdup(temp);
+    else
+        shell->already = 1;
+    return status;
 }
 
-int go_path(char *path, char **env)
+int cd(char **buffer, char **env, shell_t *shell)
 {
-    struct stat error;
+    int args = get_args(buffer);
+    int status = 0;
+    static char *temp;
 
-    write_old_path(env);
-    if (chdir(path) != 0) {
-        my_putstr(path);
-        if (stat(path, &error) == -1) {
-            my_putstr(": No such file or directory.\n");
-            return 1;
-        }
-        if (access(path, X_OK) == -1 && access(path, F_OK) == 0)
-            my_putstr(": Permission denied.\n");
-        if (!S_ISDIR(error.st_mode)) {
-            my_putstr(": Not a directory.\n");
-        }
-    } else {
-        write_old_path(env);
-        write_new_path(env);
+    temp = my_strdup(shell->old_path);
+    if (args < 2) {
+        status = go_home(env);
+        shell->already = 1;
     }
-    return 0;
-}
-
-int cd(char **buffer, char **env)
-{
-    int args = 0;
-
-    args = get_args(buffer);
-    if (args < 2)
-        go_home(env);
-    if (args == 2 && buffer[1][0] != '-')
-        go_path(buffer[1], env);
-    if (args == 2 && buffer[1][0] == '-')
-        go_old(env);
-    if (args > 2)
-        my_putstr("cd: Too many arguments.\n");
-    return 0;
+    if (args == 2 && buffer[1][0] != '-') {
+        status = init_going_to_path(buffer[1], shell, temp);
+    }
+    if (args == 2 && buffer[1][0] == '-') {
+        status = go_old_path(shell);
+    }
+    return status;
 }

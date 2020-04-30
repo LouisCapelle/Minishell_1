@@ -19,7 +19,9 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/lib/my_str_to_word_array.c \
 	  ./srcs/lib/my_strstr.c \
 	  ./srcs/lib/my_strcmp.c \
+	  ./srcs/lib/my_strdup.c \
 	  ./srcs/built_in/built_in.c \
+	  ./srcs/built_in/go_to.c \
 	  ./srcs/shell.c \
 	  ./srcs/check_errors.c \
 	  ./srcs/parse_path/path.c \
@@ -28,10 +30,9 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/lib/my_strcat.c \
 	  ./srcs/commands.c \
 	  ./srcs/built_in/cd.c \
+	  ./srcs/built_in/build_in2.c \
 	  ./srcs/built_in/env.c \
-	  ./srcs/built_in/built_2.c \
-	  ./srcs/built_in/old_path.c \
-	  ./srcs/lib/my_strdup.c \
+	  ./srcs/built_in/exec_local.c \
 	  ./srcs/free.c
 
 OBJS	= $(SRCS:.c=.o)

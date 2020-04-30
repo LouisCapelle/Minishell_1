@@ -7,10 +7,21 @@
 
 #include "my.h"
 
+int print_env(char **env)
+{
+    int i = 0;
+
+    while (env[i]) {
+        my_putstr(env[i]);
+        my_putchar('\n');
+        i += 1;
+    }
+}
+
 int set_env(char **buffer, char **env)
 {
     if (get_args(buffer) < 2)
-        exec_cmd(buffer, "/usr/bin/env", env);
+        print_env(env);
     return 0;
 }
 

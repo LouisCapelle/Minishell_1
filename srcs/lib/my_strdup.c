@@ -5,14 +5,14 @@
 ** my_strdup
 */
 
-#include <stdlib.h>
-#include <my.h>
+#include "my.h"
 
 char *my_strcpy(char *dest, char *src)
 {
-    int i = 0;
+    int   i = 0;
 
-    while (src[i]) {
+    while (src[i])
+    {
         dest[i] = src[i];
         i += 1;
     }
@@ -22,10 +22,12 @@ char *my_strcpy(char *dest, char *src)
 
 char *my_strdup(char *str)
 {
-	int len = my_strlen(str) + 1;
-	char *dup = malloc(sizeof(char *) * len);
+    char *s;
 
-	dup = my_strcpy(dup, str);
-	dup[len - 1] = '\0';
-	return (dup);
+    if ((s = malloc(my_strlen(str))) == 0)
+    {
+        return (0);
+    }
+    my_strcpy(s, str);
+    return (s);
 }

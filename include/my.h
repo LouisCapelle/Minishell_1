@@ -26,6 +26,8 @@ typedef struct shell
     char **path_parsed;
     char *buf;
     char **buf_array;
+    char *old_path;
+    int already;
     pid_t pid;
 }shell_t;
 
@@ -42,6 +44,10 @@ void my_putchar(char c);
 int my_put_nbr(int nb);
 
 int my_strlen(char *str);
+
+char *my_strncpy(char *dest, char const *src, int nb);
+
+char *my_strndup(char const *src, int n);
 
 char *my_revstr(char *str);
 
@@ -67,9 +73,7 @@ char *get_path_line(char **env);
 
 char **path_to_word_array(char *path_line);
 
-int *my_strncpy(char *dest, char *src, int n);
-
-char *check_command(void);
+char *check_command(char **env);
 
 void not_found(char *cmd);
 
@@ -83,9 +87,9 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed);
 
 int exec_command(char **env, char **buffer, shell_t *shell);
 
-int do_builtin(int built, char **env, char **buffer);
+int do_builtin(int built, char **env, char **buffer, shell_t *shell);
 
-int cd(char **buffer, char **env);
+int cd(char **buffer, char **env, shell_t *shell);
 
 char *get_home_path(char **env);
 
@@ -99,24 +103,30 @@ int exec_cmd(char **buffer, char *cmd, char **env);
 
 int unset_env(char **buffer, char **env);
 
+int check_local(char *cmd, char **env);
+
+void get_segfault(int segfault);
+
+int print_env(char **env);
+
+void my_exit(void);
+
 int check_exit(char **buffer);
 
 int check_cd(char **buffer);
+
+int check_env(char **buffer);
 
 int check_setenv(char **buffer);
 
 int check_unsetenv(char **buffer);
 
-int go_old(char **env);
-
-int go_path(char *path, char **env);
-
-char *my_strcpy(char *dest, char *src);
-
 char *my_strdup(char *str);
 
-int write_old_path(char **env);
+int go_old_path(shell_t *shell);
 
-int write_new_path(char **env);
+int go_home(char **env);
+
+int go_path(char *path);
 
 #endif /* !MY_H_ */

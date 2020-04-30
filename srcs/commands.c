@@ -6,17 +6,12 @@
 */
 
 #include "my.h"
-#include <string.h>
 
 void get_segfault(int segfault)
 {
-    if (!WIFEXITED(segfault) && WIFSIGNALED(segfault)) {
-        if (WTERMSIG(segfault) == 8)
-            my_putstr("Floating exception\n");
-        else
-            my_putstr(strsignal(WTERMSIG(segfault)));
-        if (WCOREDUMP(segfault))
-            my_putstr(" (core dumped)\n");
+    if (WIFSIGNALED(segfault) && !WIFEXITED(segfault) && WCOREDUMP(segfault)) {
+        my_putstr(" (core dumped)");
+        my_putstr("\n");
     }
 }
 
@@ -41,7 +36,7 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed)
         return NULL;
     while (success == 0 && i <= count_path(path_line)) {
         cmd = hanled_exec_path(path_parsed[i], buffer[0]);
-        if (access(cmd, F_OK) == 0)
+        if (access(cmd, 1) != -1)
             success = 1;
         else
             success = 0;
@@ -61,7 +56,7 @@ int exec_cmd(char **buffer, char *cmd, char **env)
     if (pid != 0) {
         wait(&error);
         get_segfault(error);
-    } else {
+    }else {
         if (execve(cmd, buffer, env) == -1) {
             if (errno == ENOEXEC) {
                 my_putstr(cmd);
@@ -88,14 +83,14 @@ int exec_command(char **env, char **buffer, shell_t *shell)
     if (built == -1 && cmd == NULL){
         not_found(buffer[0]);
         free(cmd);
+        return 1;
     }
     if (cmd != NULL) {
-        exec_cmd(buffer, cmd, env);
+        return (exec_cmd(buffer, cmd, env));
         free(cmd);
     }
     if (built >= 1){
-        do_builtin(built, env, buffer);
+        return (do_builtin(built, env, buffer, shell));
         free(cmd);
     }
-    return 0;
 }
