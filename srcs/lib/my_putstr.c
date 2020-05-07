@@ -18,3 +18,14 @@ int my_putstr(char *str)
     }
     return (0);
 }
+
+int my_putstr_noback(char *str)
+{
+    int i = 0;
+
+    while (str[i]) {
+        if (str[i] != '\n')
+            my_putchar(str[i]);
+        i += 1;
+    }
+}

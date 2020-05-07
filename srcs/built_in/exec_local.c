@@ -31,29 +31,28 @@ int exec_local(char *cmd, char **env)
 
     if (pid != 0) {
         wait(&error);
-        get_segfault(error);
+        return get_segfault(error);
     }else {
         if (execve(parsed_cmd, buffer, env) == -1) {
             if (errno == ENOEXEC) {
-                my_putstr(cmd);
+                my_putstr_noback(cmd);
                 my_putstr(": Exed format error. Wrong Architecture.\n");
                 exit(0);
             } else if (errno == EACCES) {
-                my_putstr(cmd);
+                my_putstr_noback(cmd);
                 my_putstr(": Permission denied.\n");
                 exit(0);
             }
         }
         exit(0);
     }
-    return 0;
 }
 
 int check_local(char *cmd, char **env)
 {
+    int status = 0;
     if (my_strncmp(cmd, "./", 2) == 0) {
-        exec_local(cmd, env);
-        return 0;
+        return exec_local(cmd, env);
     }
-    return 1;
+    return -1;
 }

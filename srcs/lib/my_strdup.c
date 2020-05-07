@@ -9,12 +9,11 @@
 
 char *my_strcpy(char *dest, char *src)
 {
-    int   i = 0;
+    int i = 0;
 
-    while (src[i])
-    {
+    while (src[i] != 0) {
         dest[i] = src[i];
-        i += 1;
+        i++;
     }
     dest[i] = '\0';
     return (dest);
@@ -24,7 +23,7 @@ char *my_strdup(char *str)
 {
     char *s;
 
-    if ((s = malloc(my_strlen(str))) == 0)
+    if ((s = malloc(sizeof(char) * (my_strlen(str) + 2))) == 0)
     {
         return (0);
     }

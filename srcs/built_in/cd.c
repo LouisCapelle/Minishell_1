@@ -18,37 +18,27 @@ int get_args(char **args)
     return i;
 }
 
-int init_going_to_path(char *path, shell_t *shell, char *temp)
+int cd(char **buffer, char **env)
 {
+    static int value = 0;
+    size_t size = 0;
+    static char *save = NULL;
+    char *buf = NULL;
+    static char *save_path = NULL;
     int status = 0;
-    char old_path[PATH_MAX];
 
-    getcwd(old_path, sizeof(old_path));
-    shell->old_path = my_strdup(old_path);
-    status = go_path(path);
-    if (status == 1)
-        shell->old_path = my_strdup(temp);
-    else
-        shell->already = 1;
-    return status;
-}
-
-int cd(char **buffer, char **env, shell_t *shell)
-{
-    int args = get_args(buffer);
-    int status = 0;
-    static char *temp;
-
-    temp = my_strdup(shell->old_path);
-    if (args < 2) {
-        status = go_home(env);
-        shell->already = 1;
+    save_path = getcwd(buf, size);
+    if (get_args(buffer) < 2)
+        status = go_path(get_home_path(env));
+    if (get_args(buffer) == 2 && buffer[1][0] != '-')
+        status = go_path(buffer[1]);
+    if (get_args(buffer) == 2 && buffer[1][0] == '-' && value > 0)
+        status = go_path(save);
+    if (get_args(buffer) == 2 && buffer[1][0] == '-' && value <= 0) {
+        my_putstr(": No such file or directory.\n"); status = 1;
     }
-    if (args == 2 && buffer[1][0] != '-') {
-        status = init_going_to_path(buffer[1], shell, temp);
-    }
-    if (args == 2 && buffer[1][0] == '-') {
-        status = go_old_path(shell);
-    }
+    if (status == 0) value += 1;
+    free(save);
+    save = my_strdup(save_path);
     return status;
 }

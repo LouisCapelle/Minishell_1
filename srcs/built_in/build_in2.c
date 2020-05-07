@@ -30,7 +30,7 @@ int do_builtin(int built, char **env, char **buffer, shell_t *shell)
     if (built < 1)
         return 0;
     if (built == 1)
-        return (cd(buffer, env, shell));
+        return (cd(buffer, env));
     if (built == 2)
         set_env(buffer, env);
     if (built == 3)

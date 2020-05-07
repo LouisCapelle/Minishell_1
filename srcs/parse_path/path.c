@@ -23,14 +23,14 @@ char *get_home_path(char **env)
 {
     int i = 0;
     int pos_home = find_home_line(env);
-    char *result = malloc(sizeof(char) * my_strlen(env[pos_home]));
+    char *result = malloc(sizeof(char) * my_strlen(env[pos_home]) + 1);
 
     while (env[pos_home][i]) {
         result[i] = env[pos_home][i];
         i += 1;
     }
-    result[i + 1] = '\0';
-    return result;
+    result[i] = '\0';
+    return result+5;
 }
 
 int find_path_line(char **env)

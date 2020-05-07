@@ -89,7 +89,7 @@ int exec_command(char **env, char **buffer, shell_t *shell);
 
 int do_builtin(int built, char **env, char **buffer, shell_t *shell);
 
-int cd(char **buffer, char **env, shell_t *shell);
+int cd(char **buffer, char **env);
 
 char *get_home_path(char **env);
 
@@ -105,7 +105,7 @@ int unset_env(char **buffer, char **env);
 
 int check_local(char *cmd, char **env);
 
-void get_segfault(int segfault);
+int get_segfault(int segfault);
 
 int print_env(char **env);
 
@@ -128,5 +128,13 @@ int go_old_path(shell_t *shell);
 int go_home(char **env);
 
 int go_path(char *path);
+
+int my_putstr_noback(char *str);
+
+char **separtor_to_word_array(char *cmd);
+
+int check_separator(char *cmd);
+
+int exec_separators(char **commands, shell_t *shell, char *cmd);
 
 #endif /* !MY_H_ */

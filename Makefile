@@ -33,6 +33,8 @@ SRCS	= ./srcs/main.c \
 	  ./srcs/built_in/build_in2.c \
 	  ./srcs/built_in/env.c \
 	  ./srcs/built_in/exec_local.c \
+	  ./srcs/separator/parce_separator.c \
+	  ./srcs/separator/exec_separator.c \
 	  ./srcs/free.c
 
 OBJS	= $(SRCS:.c=.o)

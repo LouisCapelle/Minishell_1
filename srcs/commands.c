@@ -7,12 +7,21 @@
 
 #include "my.h"
 
-void get_segfault(int segfault)
+int get_segfault(int segfault)
 {
-    if (WIFSIGNALED(segfault) && !WIFEXITED(segfault) && WCOREDUMP(segfault)) {
-        my_putstr(" (core dumped)");
-        my_putstr("\n");
+    if (WIFSIGNALED(segfault)) {
+        if (WTERMSIG(segfault) != 8)
+            my_putstr(strsignal(WTERMSIG(segfault)));
+        else {
+            my_putstr("Floating exception\n");
+        }
+        if (WCOREDUMP(segfault)) {
+            my_putstr(" (core dumped)\n");
+            return 139;
+        }
+        return 1;
     }
+    return 0;
 }
 
 char *hanled_exec_path(char *path_parsed, char *entry)
@@ -34,7 +43,7 @@ char *search_in_path(char *path_line, char **buffer, char **path_parsed)
 
     if (my_strncmp(buffer[0], "cd", 2) == 0)
         return NULL;
-    while (success == 0 && i <= count_path(path_line)) {
+    while (success == 0 && i < count_path(path_line)) {
         cmd = hanled_exec_path(path_parsed[i], buffer[0]);
         if (access(cmd, 1) != -1)
             success = 1;
@@ -55,17 +64,19 @@ int exec_cmd(char **buffer, char *cmd, char **env)
 
     if (pid != 0) {
         wait(&error);
-        get_segfault(error);
+        return (get_segfault(error));
     }else {
         if (execve(cmd, buffer, env) == -1) {
             if (errno == ENOEXEC) {
-                my_putstr(cmd);
+                my_putstr_noback(cmd);
                 my_putstr(": Exed format error. Wrong Architecture.\n");
                 exit(0);
+                return 1;
             } else if (errno == EACCES) {
-                my_putstr(cmd);
+                my_putstr_noback(cmd);
                 my_putstr(": Permission denied.\n");
                 exit(0);
+                return 1;
             }
         }
         exit(0);
