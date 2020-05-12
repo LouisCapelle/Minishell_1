@@ -99,4 +99,8 @@ int prepare_command(shell_t *shell, char **parsed_cmd);
 
 int exec_command(char *cmd, char **buffer, char **env);
 
+int get_args(char **args);
+
+int my_setenv(char **buffer, shell_t *shell);
+
 #endif /* !MY_H_ */
