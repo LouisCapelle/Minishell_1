@@ -24,7 +24,6 @@ int get_segfault(int segfault)
         }
         if (WCOREDUMP(segfault)) {
             my_putstr(" (core dumped)\n");
-            return 139;
         }
         return 1;
     }
