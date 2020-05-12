@@ -17,11 +17,10 @@ int command_not_found(char *cmd)
 int get_segfault(int segfault)
 {
     if (!WIFEXITED(segfault) && WIFSIGNALED(segfault)) {
-        if (WTERMSIG(segfault) != 8)
-            my_putstr(strsignal(WTERMSIG(segfault)));
-        else {
+        if (WTERMSIG(segfault) == 8)
             my_putstr("Floating exception\n");
-        }
+        else
+            my_putstr(strsignal(WTERMSIG(segfault)));
         if (WCOREDUMP(segfault)) {
             my_putstr(" (core dumped)\n");
         }
