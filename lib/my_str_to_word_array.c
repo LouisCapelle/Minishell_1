@@ -13,7 +13,7 @@ int is_charac(char c)
     if (c >= '0' && c <= '9')
         return (1);
     else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-            || (c >= 33 && c < 47) || (c >= 58 && c <= 64) || c == '/')
+        || (c >= 33 && c < 47) || (c >= 58 && c <= 64) || c == '/' || c == '_')
         return (1);
     else
         return (0);
