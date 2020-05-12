@@ -10,13 +10,16 @@
 int find_line(char *line, char **env)
 {
     int i = 0;
+    int result = -1;
 
-    while (env) {
-        if (my_strncmp(env[i], line, my_strlen(line)) == 0)
-            return i;
+    if (line == NULL)
+        return -1;
+    while (env[i]) {
+        if (my_strncmp(line, env[i], my_strlen(line)) == 0)
+            result = i;
         i += 1;
     }
-    return -1;
+    return result;
 }
 
 char *get_env_line(char *line, char **env)

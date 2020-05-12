@@ -6,10 +6,25 @@
 */
 
 #include "my.h"
+#include <stdlib.h>
 
 int delete_env_var(shell_t *shell, char **buffer)
 {
+    int i = 1;
+    int var = 0;
+    int line = 0;
 
+    while(buffer[i] != NULL) {
+        var = get_args(shell->env);
+        line = find_line(buffer[i], shell->env);
+        if (line != -1) {
+            shell->env[line] = NULL;
+            shell->env[line] = shell->env[var - 1];
+            shell->env[var - 1] = NULL;
+        }
+        i += 1;
+    }
+    return 0;
 }
 
 int my_unsetenv(shell_t *shell, char **buffer)

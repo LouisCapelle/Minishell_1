@@ -107,4 +107,6 @@ int check_creating_env_var(char **buffer, int args);
 
 int my_unsetenv(shell_t *shell, char **buffer);
 
+int my_strcmp(char *s1, char *s2);
+
 #endif /* !MY_H_ */

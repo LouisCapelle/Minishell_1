@@ -32,20 +32,7 @@ int tab_len(char **tab)
 
 char **create_env_variable(char **buffer, shell_t *shell)
 {
-    char **new_env = malloc(sizeof(char *) * tab_len(shell->env) + 2);
-    char *env_variable = NULL;
-    int i = 0;
-
-    while (shell->env[i]) {
-        new_env[i] = my_strdup(shell->env[i]);
-        i += 1;
-    }
-    env_variable = my_strdup(buffer[1]);
-    env_variable = my_strcat(env_variable, "=");
-    env_variable = my_strcat(env_variable, buffer[2]);
-    new_env[i] = my_strdup(env_variable);
-    new_env[i + 1] = NULL;
-    return new_env;
+    
 }
 
 int my_setenv(char **buffer, shell_t *shell)
@@ -53,7 +40,7 @@ int my_setenv(char **buffer, shell_t *shell)
     int args = get_args(buffer);
 
     if (args > 1 && check_creating_env_var(buffer, args) == 0) {
-        shell->env = create_env_variable(buffer, shell);
+        create_env_variable(buffer, shell);
         return 0;
     } else if (args == 1){
         return prompt_env(shell->env);
