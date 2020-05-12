@@ -3,3 +3,4 @@ my_tests.sh
 *.o
 test_shell.tgz
 mysh
+a.out
