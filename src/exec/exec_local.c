@@ -17,9 +17,17 @@ bool check_access_local(char *cmd)
 
 int exec_local(char **cmd, shell_t *shell)
 {
-    if (my_strncmp(cmd[0], "./", 2) == 0 && check_access_local(cmd[0]))
-        return exec_command(cmd[0], cmd, shell->env);
-    else if (my_strncmp(cmd[0], "/", 1) == 0 && check_access_local(cmd[0]))
-        return exec_command(cmd[0], cmd, shell->env);
+    if (my_strncmp(cmd[0], "./", 2) == 0) {
+        if (check_access_local(cmd[0]))
+            return exec_command(cmd[0], cmd, shell->env);
+        else
+            return 1;
+    }
+    else if (my_strncmp(cmd[0], "/", 1) == 0) {
+        if (check_access_local(cmd[0]))
+            return exec_command(cmd[0], cmd, shell->env);
+        else
+            return 1;
+    }
     return 0;
 }

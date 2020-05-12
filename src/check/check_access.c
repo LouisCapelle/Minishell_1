@@ -33,8 +33,8 @@ char *get_cmd_path(char *cmd, shell_t *shell)
     int i = 0;
     int success = 0;
 
-    while (success == 0 && i < count_path_args(shell->path_parsed)) {
-        result = hanled_exec_path(shell->path_parsed[i], cmd);
+    while (success == 0 && i <= count_path_args(shell->path_parsed)) {
+        result = hanled_exec_path(shell->path_parsed[i]+5, cmd);
         if (access(result, 1) != -1)
             success = 1;
         else

@@ -46,6 +46,7 @@ int init_command(shell_t *shell, char *cmd)
         return do_builtin(parsed_cmd, shell);
     else if (check_local(parsed_cmd[0]))
         return exec_local(parsed_cmd, shell);
-    else
+    else {
         return prepare_command(shell, parsed_cmd);
+    }
 }
