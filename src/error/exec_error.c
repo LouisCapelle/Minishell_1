@@ -16,7 +16,7 @@ int command_not_found(char *cmd)
 
 int get_segfault(int segfault)
 {
-    if (WIFSIGNALED(segfault)) {
+    if (!WIFEXITED(segfault) && WIFSIGNALED(segfault)) {
         if (WTERMSIG(segfault) != 8)
             my_putstr(strsignal(WTERMSIG(segfault)));
         else {
