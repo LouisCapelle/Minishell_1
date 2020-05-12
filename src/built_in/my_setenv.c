@@ -52,10 +52,13 @@ int my_setenv(char **buffer, shell_t *shell)
 {
     int args = get_args(buffer);
 
-    if (args > 1) {
+    if (args > 1 && check_creating_env_var(buffer, args) == 0) {
         shell->env = create_env_variable(buffer, shell);
-    } else {
+        return 0;
+    } else if (args == 1){
         return prompt_env(shell->env);
+    }else {
+        return 1;
     }
     return 0;
 }

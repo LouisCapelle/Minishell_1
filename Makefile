@@ -35,6 +35,7 @@ SRCS	= ./lib/my_put_nbr.c \
 	  ./src/built_in/my_cd.c \
 	  ./src/built_in/check_builtins.c \
 	  ./src/built_in/my_setenv.c \
+	  ./src/built_in/my_unsetenv.c \
 	  ./src/parsing/word_array_separator.c \
 	  ./src/parsing/get_env_line.c
 
