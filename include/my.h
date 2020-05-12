@@ -105,4 +105,6 @@ int my_setenv(char **buffer, shell_t *shell);
 
 int check_creating_env_var(char **buffer, int args);
 
+int my_unsetenv(shell_t *shell, char **buffer);
+
 #endif /* !MY_H_ */

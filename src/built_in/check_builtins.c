@@ -16,6 +16,8 @@ bool check_builtins(char *cmd)
         return true;
     if (my_strncmp(cmd, "setenv", 7) == 0)
         return true;
+    if (my_strncmp(cmd, "unsetenv", 9) == 0)
+        return true;
     return false;
 }
 
@@ -27,5 +29,7 @@ int do_builtin(char **cmd, shell_t *shell)
         my_exit(0);
     if (my_strncmp(cmd[0], "setenv", 7) == 0)
         return my_setenv(cmd, shell);
+    if (my_strncmp(cmd[0], "unsetenv", 9) == 0)
+        return my_unsetenv(shell, cmd);
     return 0;
 }
