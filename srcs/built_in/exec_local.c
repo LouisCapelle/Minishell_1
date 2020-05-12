@@ -36,7 +36,7 @@ int exec_local(char *cmd, char **env)
         if (execve(parsed_cmd, buffer, env) == -1) {
             if (errno == ENOEXEC) {
                 my_putstr_noback(cmd);
-                my_putstr(": Exed format error. Wrong Architecture.\n");
+                my_putstr(": Exec format error. Wrong Architecture.\n");
                 exit(0);
             } else if (errno == EACCES) {
                 my_putstr_noback(cmd);
