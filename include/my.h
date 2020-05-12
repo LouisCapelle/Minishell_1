@@ -25,8 +25,6 @@ typedef struct shell
     char **env;
     char *path_line;
     char **path_parsed;
-    char *cmd;
-    char **cmd_parsed;
     pid_t pid;
 }shell_t;
 
@@ -63,9 +61,9 @@ char **my_str_to_word_array(char *str);
 
 char *get_env_line(char *line, char **env);
 
-void free_all(char **buf_array);
+void free_word_array(char **buf_array);
 
-char **separator_to_word_array(char *separator, char carac);
+char **path_to_word_array(char *path_line);
 
 int get_command(shell_t *shell);
 
@@ -108,5 +106,7 @@ int check_creating_env_var(char **buffer, int args);
 int my_unsetenv(shell_t *shell, char **buffer);
 
 int my_strcmp(char *s1, char *s2);
+
+void free_struct(shell_t *shell);
 
 #endif /* !MY_H_ */

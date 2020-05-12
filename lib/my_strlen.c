@@ -13,8 +13,8 @@ int	my_strlen(char *str)
 
     if (str == NULL)
         return -1;
-    while (str[i] != '\0'){
-        i = i +  1;
+    while (str[i] != '\0') {
+        i = i + 1;
     }
     return i;
 }

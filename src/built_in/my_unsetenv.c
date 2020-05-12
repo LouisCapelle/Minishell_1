@@ -16,8 +16,11 @@ int delete_env_var(shell_t *shell, char **buffer)
 
     while(buffer[i] != NULL) {
         var = get_args(shell->env);
+        printf("%d\n", var);
         line = find_line(buffer[i], shell->env);
+        printf("%d\n", line);
         if (line != -1) {
+            free(shell->env[line]);
             shell->env[line] = NULL;
             shell->env[line] = shell->env[var - 1];
             shell->env[var - 1] = NULL;

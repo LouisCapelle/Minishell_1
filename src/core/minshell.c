@@ -12,7 +12,7 @@ shell_t *init_minishell(char **env)
     shell_t *shell = malloc(sizeof(shell_t));
 
     shell->path_line = get_env_line("PATH=", env);
-    shell->path_parsed = separator_to_word_array(shell->path_line, ':');
+    shell->path_parsed = path_to_word_array(shell->path_line+5);
     shell->env = env;
     return shell;
 }
@@ -25,6 +25,6 @@ int minishell(char **env)
     while (1) {
         status = get_command(shell);
     }
-    free(shell);
+    free_struct(shell);
     return status;
 }

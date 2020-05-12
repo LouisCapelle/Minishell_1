@@ -10,7 +10,7 @@
 
 char *my_strcat(char *str, char *buff)
 {
-    char *dest = malloc(sizeof(char) * my_strlen(str) + my_strlen(buff) + 1);
+    char *dest = malloc(sizeof(char) * (my_strlen(str) + my_strlen(buff) + 1));
     int i = 0;
     int k = 0;
 
@@ -27,5 +27,4 @@ char *my_strcat(char *str, char *buff)
     }
     dest[i] = '\0';
     return dest;
-    free(dest);
 }

@@ -7,7 +7,14 @@
 
 #include "my.h"
 
-void free_all(char **buf_array)
+void free_struct(shell_t *shell)
+{
+    free_word_array(shell->env);
+    free_word_array(shell->path_parsed);
+    free(shell->path_line);
+}
+
+void free_word_array(char **buf_array)
 {
     int i = 0;
 
