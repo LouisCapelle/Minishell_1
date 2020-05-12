@@ -1,9 +1,12 @@
 /*
 ** EPITECH PROJECT, 2020
-** my
+** minishell
 ** File description:
-** main
+** my
 */
+
+#ifndef MY_H_
+#define MY_H_
 
 #include <stdarg.h>
 #include <sys/types.h>
@@ -15,25 +18,22 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
-
-#ifndef MY_H_
-#define MY_H_
+#include <stdbool.h>
 
 typedef struct shell
 {
     char **env;
     char *path_line;
     char **path_parsed;
-    char *buf;
-    char **buf_array;
-    char *old_path;
-    int already;
+    char *cmd;
+    char **cmd_parsed;
     pid_t pid;
 }shell_t;
 
-int my_putstr(char *str);
 
-void my_pid(shell_t *control, int a, char **env);
+int minishell(char **env);
+
+int my_putstr(char *str);
 
 char *my_strcat(char *dest, char *src);
 
@@ -53,88 +53,50 @@ char *my_revstr(char *str);
 
 char *my_strcat(char *str, char *buff);
 
-char **my_str_to_word_array(char *str);
-
-int count_path(char *line);
-
-int shell(char **env);
-
-shell_t *init_shell(shell_t *shell, char **env);
-
-int check_args(int ac, char **env);
-
-int my_strcmp(char *s1, char *s2);
+int my_putstr_noback(char *str);
 
 int my_strncmp(char *s1, char *s2, int n);
 
-int find_path_line(char **env);
+char *my_strdup(char *str);
 
-char *get_path_line(char **env);
+char **my_str_to_word_array(char *str);
 
-char **path_to_word_array(char *path_line);
-
-char *check_command(char **env);
-
-void not_found(char *cmd);
-
-int check_builtin(char **buffer);
-
-void not_found(char *cmd);
-
-char *hanled_exec_path(char *path_parsed, char *entry);
-
-char *search_in_path(char *path_line, char **buffer, char **path_parsed);
-
-int exec_command(char **env, char **buffer, shell_t *shell);
-
-int do_builtin(int built, char **env, char **buffer, shell_t *shell);
-
-int cd(char **buffer, char **env);
-
-char *get_home_path(char **env);
+char *get_env_line(char *line, char **env);
 
 void free_all(char **buf_array);
 
-int get_args(char **args);
+char **separator_to_word_array(char *separator, char carac);
 
-int set_env(char **buffer, char **env);
+int get_command(shell_t *shell);
 
-int exec_cmd(char **buffer, char *cmd, char **env);
+int find_line(char *line, char **env);
 
-int unset_env(char **buffer, char **env);
+int check_spaces(char *cmd);
 
-int check_local(char *cmd, char **env);
+int init_command(shell_t *shell, char *cmd);
+
+void my_exit(int status);
+
+bool check_builtins(char *cmd);
+
+int do_builtin(char **cmd, shell_t *shell);
+
+int do_cd(char **buffer, char **env);
+
+char *get_cmd_path(char *cmd, shell_t *shell);
+
+bool check_local(char *cmd);
+
+int command_not_found(char *cmd);
+
+int exec_error(char *cmd);
 
 int get_segfault(int segfault);
 
-int print_env(char **env);
+int exec_local(char **cmd, shell_t *shell);
 
-void my_exit(void);
+int prepare_command(shell_t *shell, char **parsed_cmd);
 
-int check_exit(char **buffer);
-
-int check_cd(char **buffer);
-
-int check_env(char **buffer);
-
-int check_setenv(char **buffer);
-
-int check_unsetenv(char **buffer);
-
-char *my_strdup(char *str);
-
-int go_old_path(shell_t *shell);
-
-int go_home(char **env);
-
-int go_path(char *path);
-
-int my_putstr_noback(char *str);
-
-char **separtor_to_word_array(char *cmd);
-
-int check_separator(char *cmd);
-
-int exec_separators(char **commands, shell_t *shell, char *cmd);
+int exec_command(char *cmd, char **buffer, char **env);
 
 #endif /* !MY_H_ */
