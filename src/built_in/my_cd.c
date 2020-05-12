@@ -50,8 +50,7 @@ int do_cd(char **buffer, char **env)
     int status = 0;
 
     save_path = getcwd(buf, size);
-    if (get_args(buffer) < 2)
-        status = go_path(get_env_line("HOME=", env)+5);
+    if (get_args(buffer) < 2) status = go_path(get_env_line("HOME=", env)+5);
     if (get_args(buffer) == 2 && buffer[1][0] != '-')
         status = go_path(buffer[1]);
     if (get_args(buffer) == 2 && buffer[1][0] == '-' && value > 0)
